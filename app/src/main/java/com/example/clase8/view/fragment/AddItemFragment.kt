@@ -11,14 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.clase8.R
 import com.example.clase8.databinding.FragmentAddItemBinding
 import com.example.clase8.model.Inventory
-import com.example.clase8.model.Product
 import com.example.clase8.viewmodel.InventoryViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class AddItemFragment : Fragment() {
 
     private lateinit var binding: FragmentAddItemBinding
@@ -36,9 +32,6 @@ class AddItemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         controladores()
-        observerViewModel()
-
-
     }
 
     private fun controladores() {
@@ -72,23 +65,4 @@ class AddItemFragment : Fragment() {
             }
         }
     }
-
-
-
-    private fun observerViewModel(){
-        observerListProduct()
-    }
-
-    private fun observerListProduct() {
-
-        inventoryViewModel.getProducts()
-        inventoryViewModel.listProducts.observe(viewLifecycleOwner){ lista ->
-
-            val product = lista[2]
-            Glide.with(binding.root.context).load(product.image).into(binding.ivImagenApi)
-            binding.tvTitleProduct.text = product.title
-        }
-    }
-
-
 }

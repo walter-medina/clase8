@@ -1,5 +1,4 @@
 package com.example.clase8.view.fragment
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +10,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clase8.R
 import com.example.clase8.databinding.FragmentHomeInventoryBinding
-import com.example.clase8.model.Inventory
 import com.example.clase8.view.adapter.InventoryAdapter
 import com.example.clase8.viewmodel.InventoryViewModel
-import dagger.hilt.android.AndroidEntryPoint
-
-@AndroidEntryPoint
 class HomeInventoryFragment : Fragment() {
     private lateinit var binding: FragmentHomeInventoryBinding
     private val inventoryViewModel: InventoryViewModel by viewModels()
@@ -47,7 +42,6 @@ class HomeInventoryFragment : Fragment() {
     private fun observadorViewModel(){
         observerListInventory()
         observerProgress()
-
     }
 
     private fun observerListInventory(){
@@ -62,9 +56,7 @@ class HomeInventoryFragment : Fragment() {
             adapter.notifyDataSetChanged()
 
         }
-
     }
-
     private fun observerProgress(){
         inventoryViewModel.progresState.observe(viewLifecycleOwner){status ->
             binding.progress.isVisible = status

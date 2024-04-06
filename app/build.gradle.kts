@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id ("kotlin-kapt")
-    id ("com.google.dagger.hilt.android")
 }
 
 android {
@@ -94,8 +93,6 @@ dependencies {
 
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.12.0")
-
-
 
 }
 

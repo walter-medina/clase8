@@ -11,9 +11,7 @@ import com.example.clase8.R
 import com.example.clase8.databinding.FragmentItemEditBinding
 import com.example.clase8.model.Inventory
 import com.example.clase8.viewmodel.InventoryViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class ItemEditFragment : Fragment() {
     private lateinit var binding: FragmentItemEditBinding
     private val inventoryViewModel: InventoryViewModel by viewModels()

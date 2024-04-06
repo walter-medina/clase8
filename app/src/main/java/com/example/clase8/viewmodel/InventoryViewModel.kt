@@ -1,20 +1,18 @@
 package com.example.clase8.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clase8.model.Inventory
-import com.example.clase8.model.Product
 import com.example.clase8.repository.InventoryRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class InventoryViewModel @Inject constructor(
-    private val inventoryRepository: InventoryRepository
-) : ViewModel() {
+
+class InventoryViewModel(application: Application) : AndroidViewModel(application) {
+    val context = getApplication<Application>()
+    private val inventoryRepository = InventoryRepository(context)
 
 
     private val _listInventory = MutableLiveData<MutableList<Inventory>>()
@@ -22,10 +20,6 @@ class InventoryViewModel @Inject constructor(
 
     private val _progresState = MutableLiveData(false)
     val progresState: LiveData<Boolean> = _progresState
-
-    //para almacenar una lista de productos
-    private val _listProducts = MutableLiveData<MutableList<Product>>()
-    val listProducts: LiveData<MutableList<Product>> = _listProducts
 
     fun saveInventory(inventory: Inventory) {
         viewModelScope.launch {
@@ -72,19 +66,6 @@ class InventoryViewModel @Inject constructor(
             try {
                 inventoryRepository.updateRepositoy(inventory)
                 _progresState.value = false
-            } catch (e: Exception) {
-                _progresState.value = false
-            }
-        }
-    }
-
-    fun getProducts() {
-        viewModelScope.launch {
-            _progresState.value = true
-            try {
-                _listProducts.value = inventoryRepository.getProducts()
-                _progresState.value = false
-
             } catch (e: Exception) {
                 _progresState.value = false
             }

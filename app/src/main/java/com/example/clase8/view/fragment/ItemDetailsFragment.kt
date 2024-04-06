@@ -1,20 +1,17 @@
 package com.example.clase8.view.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.clase8.R
-import com.example.clase8.databinding.FragmentHomeInventoryBinding
 import com.example.clase8.databinding.FragmentItemDetailsBinding
 import com.example.clase8.model.Inventory
 import com.example.clase8.viewmodel.InventoryViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class ItemDetailsFragment : Fragment() {
     private lateinit var binding: FragmentItemDetailsBinding
     private val inventoryViewModel: InventoryViewModel by viewModels()
