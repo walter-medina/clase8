@@ -52,7 +52,7 @@ class ItemEditFragment : Fragment() {
         val name = binding.etName.text.toString()
         val price = binding.etPrice.text.toString().toInt()
         val quantity = binding.etQuantity.text.toString().toInt()
-        val inventory = Inventory(receivedInventory.id, name,price,quantity)
+        val inventory = Inventory(name = name, price = price, quantity = quantity)
         inventoryViewModel.updateInventory(inventory)
         findNavController().navigate(R.id.action_itemEditFragment_to_homeInventoryFragment)
 
