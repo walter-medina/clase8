@@ -10,7 +10,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.example.clase8.databinding.FragmentAddItemBinding
 import com.example.clase8.model.Inventory
 import com.example.clase8.viewmodel.InventoryViewModel
