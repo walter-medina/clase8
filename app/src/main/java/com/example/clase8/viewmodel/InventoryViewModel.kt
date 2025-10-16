@@ -14,26 +14,25 @@ class InventoryViewModel(application: Application) : AndroidViewModel(applicatio
     val context = getApplication<Application>()
     private val inventoryRepository = InventoryRepository(context)
 
-
     private val _listInventory = MutableLiveData<MutableList<Inventory>>()
     val listInventory: LiveData<MutableList<Inventory>> get() = _listInventory
 
     private val _progresState = MutableLiveData(false)
     val progresState: LiveData<Boolean> = _progresState
 
-    fun saveInventory(inventory: Inventory) {
+    fun saveInventory(inventory: Inventory, message:(String)-> Unit) {
         viewModelScope.launch {
-
             _progresState.value = true
             try {
-                inventoryRepository.saveInventory(inventory)
+                inventoryRepository.saveInventory(inventory) { msg ->
+                    message(msg)
+                }
                 _progresState.value = false
             } catch (e: Exception) {
                 _progresState.value = false
             }
         }
     }
-
     fun getListInventory() {
         viewModelScope.launch {
             _progresState.value = true

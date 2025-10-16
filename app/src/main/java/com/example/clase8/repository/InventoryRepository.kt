@@ -8,13 +8,18 @@ import kotlinx.coroutines.withContext
 
 class InventoryRepository(val context: Context){
     private var inventoryDao:InventoryDao = InventoryDB.getDatabase(context).inventoryDao()
-     suspend fun saveInventory(inventory:Inventory){
-         withContext(Dispatchers.IO){
-             inventoryDao.saveInventory(inventory)
-         }
-     }
+    suspend fun saveInventory(inventory: Inventory, messageResponse: (String) -> Unit) {
+        try {
+          withContext(Dispatchers.IO) {
+              inventoryDao.saveInventory(inventory)
+          }
+          messageResponse("Inventario guardado correctamente")
+      } catch (e: Exception) {
+          messageResponse("Error al guardar el inventario: ${e.message}")
+      }
+  }
 
-    suspend fun getListInventory():MutableList<Inventory>{
+    suspend fun getListInventory(): MutableList<Inventory>{
         return withContext(Dispatchers.IO){
             inventoryDao.getListInventory()
         }

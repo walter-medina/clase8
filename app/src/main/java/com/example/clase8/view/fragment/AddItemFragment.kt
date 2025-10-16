@@ -45,11 +45,12 @@ class AddItemFragment : Fragment() {
         val price = binding.etPrice.text.toString().toInt()
         val quantity = binding.etQuantity.text.toString().toInt()
         val inventory = Inventory(name = name, price = price, quantity = quantity)
-        inventoryViewModel.saveInventory(inventory)
-        Log.d("test",inventory.toString())
-        Toast.makeText(context,"Artículo guardado !!", Toast.LENGTH_SHORT).show()
-        findNavController().popBackStack()
 
+        inventoryViewModel.saveInventory(inventory){ message ->
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            findNavController().popBackStack()
+        }
+        Log.d("test",inventory.toString())
     }
 
     private fun validarDatos() {
